@@ -5,15 +5,15 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database("./data.sqlite");
 
 router.get('/',  async (req, res) => {
-    const userList =  await getAllUsers();
-    res.jsonp(userList);
+    const postList =  await getAllPosts();
+    res.jsonp(postList);
 })
 
-function getAllUsers() {
+function getAllPosts() {
 
     return new Promise((resolve, reject) =>{
         db.serialize(  () => {
-         db.all("SELECT * FROM users", (err, rows) => {
+            db.all("SELECT * FROM posts", (err, rows) => {
                 resolve(rows);
             })
         })

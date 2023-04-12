@@ -5,19 +5,19 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database("./data.sqlite");
 
 router.get('/',  async (req, res) => {
-    const userList =  await getAllUsers();
-    res.jsonp(userList);
+    const commentList =  await getAllComments();
+    res.jsonp(commentList);
 })
 
-function getAllUsers() {
+function getAllComments() {
 
     return new Promise((resolve, reject) =>{
         db.serialize(  () => {
-         db.all("SELECT * FROM users", (err, rows) => {
+            db.all("SELECT * FROM comments", (err, rows) => {
                 resolve(rows);
             })
         })
-    })
+    });
 }
 
 module.exports = router;
